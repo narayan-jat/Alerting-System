@@ -1,0 +1,28 @@
+# Dependencies and caches
+node_modules/
+.firebase/
+*.log
+
+# Credentials and config (see *.example files)
+public/firebase-config.js
+google-services.json
+kitchen-app/keystore/
+*.jks
+*.keystore
+keystore.properties
+.env
+.env.*
+
+# Build output
+public/khana-kitchen.apk
+*.apk
+*.aab
+kitchen-app/android/app/build/
+kitchen-app/android/build/
+kitchen-app/android/.gradle/
+kitchen-app/android/local.properties
+kitchen-app/android/capacitor-cordova-android-plugins/
+kitchen-app/android/app/src/main/assets/public/
+kitchen-app/android/app/src/main/assets/capacitor.config.json
+kitchen-app/android/app/src/main/assets/capacitor.plugins.json
+kitchen-app/android/app/src/main/res/xml/config.xml
