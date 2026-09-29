@@ -1,0 +1,15 @@
+{
+  "name": "khana-kitchen-app",
+  "private": true,
+  "scripts": {
+    "sync": "cap sync android",
+    "apk": "cap sync android && cd android && ./gradlew assembleRelease && cp app/build/outputs/apk/release/app-release.apk ../../public/khana-kitchen.apk"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2"
+  }
+}
