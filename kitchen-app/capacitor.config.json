@@ -1,0 +1,12 @@
+{
+  "appId": "com.ferrowright.khanakitchen",
+  "appName": "Khana Kitchen",
+  "webDir": "www",
+  "server": {
+    "url": "https://khana-alert.web.app/kitchen.html",
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

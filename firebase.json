@@ -1,0 +1,28 @@
+{
+  "hosting": {
+    "site": "khana-alert",
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*"],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|html|webmanifest)",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "**/*.apk",
+        "headers": [
+          { "key": "Content-Type", "value": "application/vnd.android.package-archive" },
+          { "key": "Cache-Control", "value": "no-cache" }
+        ]
+      }
+    ]
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "khana",
+      "runtime": "nodejs22",
+      "ignore": ["node_modules", ".git", "*.local"]
+    }
+  ]
+}

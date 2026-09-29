@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khana Alert</title>
+  <meta name="theme-color" content="#fff7ee">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+  <script src="firebase-config.js"></script>
+  <script type="module" src="resident.js"></script>
+</head>
+<body>
+  <main id="app"></main>
+
+  <dialog id="other">
+    <form method="dialog">
+      <h2>Kya khatam hua?</h2>
+      <input id="otherName" maxlength="30" placeholder="jaise: achaar" autocomplete="off">
+      <div class="row">
+        <button class="btn" value="cancel">Wapas</button>
+        <button class="btn primary" value="send">Bhejo</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="promo" class="promo">
+    <form method="dialog">
+      <div class="meme">
+        <div id="memeEmoji" class="meme-emoji"></div>
+        <p id="memeTop" class="meme-text"></p>
+        <p id="memeBottom" class="meme-text"></p>
+        <span class="meme-tag">⚡ Ferrowright</span>
+      </div>
+      <p class="promo-pitch">🚀 Aise hi <b>crazy apps aur websites</b> chahiye?<br><b>Ferrowright Engineering</b> bana dega.</p>
+      <div class="promo-btns">
+        <a class="btn wa" href="https://wa.me/918696695276?text=Hi%20Ferrowright%2C%20Khana%20Alert%20dekha.%20Mujhe%20bhi%20ek%20app%2Fwebsite%20banwani%20hai." target="_blank" rel="noopener">💬 WhatsApp karo</a>
+        <a class="btn" href="https://ferrowright.com" target="_blank" rel="noopener">🌐 ferrowright.com</a>
+        <button class="btn ghost" value="close">Theek hai 👍</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="brand">
+    <p class="brand-line">Made with ❤️ by <a href="https://ferrowright.com" target="_blank" rel="noopener">Ferrowright Engineering</a></p>
+    <p class="brand-sub">Aapke kaam ke liye bhi app ya website chahiye?</p>
+    <div class="brand-btns">
+      <a class="pill wa" href="https://wa.me/918696695276" target="_blank" rel="noopener">💬 WhatsApp 8696695276</a>
+      <a class="pill" href="https://ferrowright.com" target="_blank" rel="noopener">🌐 ferrowright.com</a>
+    </div>
+  </footer>
+
+  <div id="notice" class="notice" role="alert" hidden></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

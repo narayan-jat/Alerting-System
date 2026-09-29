@@ -1,0 +1,64 @@
+    // ---------------------------------------------------------------------
+    // Khana Alert (separate app, same project: ~/Documents/create/khana-alert)
+    // Rules for both apps live in this one file; deploy rules only from here.
+    // No sign-in: a PG is identified by an unguessable id in its QR link.
+    // ---------------------------------------------------------------------
+    function khanaNewReport(alertId) {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['status', 'item', 'name', 'emoji', 'say', 'meal', 'date', 'reportedAt'])
+        && d.status == 'reported'
+        && d.meal in ['breakfast', 'lunch', 'dinner']
+        && d.item is string && d.date is string
+        && d.name is string && d.name.size() <= 40
+        && d.say is string && d.say.size() <= 80
+        && d.emoji is string && d.emoji.size() <= 16
+        && alertId == d.date + '_' + d.meal + '_' + d.item
+        && d.reportedAt == request.time;
+    }
+
+    function khanaOnlyChanged(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(fields);
+    }
+
+    // Kitchen phone record. Chhutti (offUntil) is capped at 3 days from now.
+    function khanaPhoneValid() {
+      let d = request.resource.data;
+      return d.name is string && d.name.size() > 0 && d.name.size() <= 30
+        && d.platform in ['android', 'web']
+        && (!('offUntil' in d) || d.offUntil == null
+            || (d.offUntil is timestamp && d.offUntil <= request.time + duration.value(73, 'h')));
+    }
+
+    match /pgs/{pgId} {
+      allow get: if true;
+      allow create, update: if request.resource.data.keys().hasOnly(['meals', 'menu', 'updatedAt']);
+
+      match /alerts/{alertId} {
+        allow get, list: if true;
+        allow create: if khanaNewReport(alertId);
+        // Locked while reported/coming: a new report is only accepted after 'done'.
+        allow update: if (resource.data.status == 'done' && khanaNewReport(alertId))
+          || (resource.data.status == 'reported' && request.resource.data.status == 'coming'
+              && khanaOnlyChanged(['status', 'comingAt']))
+          || (resource.data.status in ['reported', 'coming'] && request.resource.data.status == 'done'
+              && khanaOnlyChanged(['status', 'doneAt']));
+      }
+
+      match /kitchenTokens/{token} {
+        allow create, update: if request.resource.data.keys().hasOnly(['createdAt', 'phoneId']);
+      }
+
+      // Shown on the setup page. Server-only fields (gone, alert flags) can't be touched by clients.
+      match /kitchenPhones/{phoneId} {
+        allow get, list: if true;
+        allow create: if request.resource.data.keys().hasOnly(['name', 'platform', 'lastSeen', 'offUntil', 'createdAt'])
+          && khanaPhoneValid();
+        allow update: if khanaOnlyChanged(['name', 'platform', 'lastSeen', 'offUntil']) && khanaPhoneValid();
+        allow delete: if true;
+      }
+
+      // Owner's setup-app push tokens for "phone uninstalled / not responding" alerts.
+      match /ownerTokens/{token} {
+        allow create, update: if request.resource.data.keys().hasOnly(['createdAt']);
+      }
+    }

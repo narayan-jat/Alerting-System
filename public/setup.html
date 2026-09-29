@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Khana Alert Setup</title>
+  <meta name="theme-color" content="#fff7ee">
+  <link rel="manifest" href="setup.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=4">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+  <script src="firebase-config.js"></script>
+  <script type="module" src="setup.js"></script>
+</head>
+<body>
+  <main id="app"></main>
+
+  <div id="poster">
+    <h1>Khana khatam? 🍽️</h1>
+    <p>Scan karo, 1 tap mein kitchen ko batao</p>
+    <div id="posterQr" class="qr"></div>
+    <p class="poster-brand">⚡ Made by Ferrowright Engineering · ferrowright.com</p>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

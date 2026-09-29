@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Khana Kitchen</string>
+    <string name="title_activity_main">Khana Kitchen</string>
+    <string name="package_name">com.ferrowright.khanakitchen</string>
+    <string name="custom_url_scheme">com.ferrowright.khanakitchen</string>
+</resources>
